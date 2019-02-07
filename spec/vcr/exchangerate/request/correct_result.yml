@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.exchangeratesapi.io/history?base=BRL&end_at=2019-01-10&start_at=2019-01-01&symbols=USD,AUD,EUR
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 07 Feb 2019 01:42:50 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d50cf36947598d7f7b4188064535e95eb1549503770; expires=Fri, 07-Feb-20
+        01:42:50 GMT; path=/; domain=.exchangeratesapi.io; HttpOnly
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4a522983a9365320-MIA
+    body:
+      encoding: ASCII-8BIT
+      string: '{"base":"BRL","end_at":"2019-01-10","start_at":"2019-01-01","rates":{"2019-01-10":{"USD":0.2717250477,"AUD":0.3776353914,"EUR":0.2355657111},"2019-01-09":{"USD":0.2711563499,"AUD":0.3783169606,"EUR":0.2367144041},"2019-01-03":{"USD":0.2650534872,"AUD":0.380412949,"EUR":0.2335684589},"2019-01-02":{"USD":0.2594354655,"AUD":0.3704302299,"EUR":0.2276348737},"2019-01-07":{"USD":0.2706377545,"AUD":0.3792948521,"EUR":0.2364681123},"2019-01-08":{"USD":0.2685193879,"AUD":0.3765374143,"EUR":0.2347197446},"2019-01-04":{"USD":0.2658723682,"AUD":0.3774627527,"EUR":0.2331600177}}}'
+    http_version: 
+  recorded_at: Thu, 07 Feb 2019 01:42:50 GMT
+recorded_with: VCR 4.0.0

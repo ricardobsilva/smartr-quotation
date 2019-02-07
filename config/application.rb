@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 module SmartrQuotation
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.autoload_paths << "#{Rails.root}/lib"
     config.load_defaults 5.2
 
     # Settings in config/environments/* take precedence over those specified here.
