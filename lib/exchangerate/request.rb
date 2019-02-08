@@ -1,3 +1,4 @@
+require 'connection'
 class Exchangerate::Request
   class << self
     def where(resource_path)
