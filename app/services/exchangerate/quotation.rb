@@ -1,3 +1,4 @@
+require './lib/exchangerate/request'
 class Exchangerate::Quotation
   CURRENCIES = ['USD','AUD','EUR']
 
