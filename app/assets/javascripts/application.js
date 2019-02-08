@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery
 //= require quotation
+//= bootstrap
 //= require_tree .
