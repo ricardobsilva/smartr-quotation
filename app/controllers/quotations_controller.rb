@@ -10,11 +10,7 @@ class QuotationsController < ApplicationController
 
   def date_interval(number_of_days)
     current_date = Date.today
-
     limit_date = current_date - number_of_days.to_i
-
-    puts current_date.strftime("%Y-%m-%d")
-    puts  limit_date.strftime("%Y-%m-%d")
     {
        start: limit_date.strftime("%Y-%m-%d"),
        end: current_date.strftime("%Y-%m-%d")
