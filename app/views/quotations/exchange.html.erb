@@ -1,16 +1,24 @@
 <div class="container col-md-7 offset-md-2">
-
-  <div class="btn-group btn-group-toggle col-sm-12 date-buttons" data-toggle="buttons">
-    <label class="btn btn-secondary">
-      <input type="radio" value="7" id="oneWeek" autocomplete="off" > 1 Week
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" value="30" id="oneMonth" autocomplete="off"> 1 Month
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" value="365" id="oneYear" autocomplete="off"> 1 Year
-    </label>
+  <div class="row">
+    <div class="btn-group btn-group-toggle col-sm-12 date-buttons" data-toggle="buttons">
+      <label class="btn btn-secondary">
+        <input type="radio" value="7" id="oneWeek" autocomplete="off" > 1 Week
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" value="30" id="oneMonth" autocomplete="off"> 1 Month
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" value="365" id="oneYear" autocomplete="off"> 1 Year
+      </label>
+    </div>
   </div>
 
   <div id="chartContainer"></div>
+
+  <div class="col-md-12 offset-md-4" id="#currencyButtons">
+    <button type="button" class="btn btn-info">$</button>
+    <button type="button" class="btn btn-info">A$</button>
+    <button type="button" class="btn btn-info">R$</button>
+    <button type="button" class="btn btn-info">€</button>
+  </div>
 </div>

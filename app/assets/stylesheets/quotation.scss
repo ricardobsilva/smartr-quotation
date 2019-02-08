@@ -4,9 +4,16 @@
 
 .container{
   padding-top: 60px;
+  position: absolute;
 }
 
 .container .date-buttons{
   display: flex;
   justify-content: flex-end;
+}
+
+#chartContainer{
+  position: inherit !important;
+  height: 400px !important;
+  width: 100% !important;
 }

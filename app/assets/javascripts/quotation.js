@@ -3,6 +3,14 @@ $( document ).ready(function() {
 	var numberOfDays = 7;
 	requestDates(numberOfDays);
 
+	var baseCurrency = '';
+	var currencyUsDollar = $("#usDollar").val();
+	var currencyAudDollar = $("#audDollar").val();
+	var currencyReal = $("#real").val();
+	var currencyEuro = $("#euro").val();
+
+	
+
 	$("#oneWeek").on('click', function(){
 		var numberOfDays = $("#oneWeek").val();
 		requestDates(numberOfDays);
