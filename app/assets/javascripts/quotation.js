@@ -1,49 +1,84 @@
 $( document ).ready(function() {
 
 	var numberOfDays = 7;
-	requestDates(numberOfDays);
+	var baseCurrency = 'BRL';
 
-	var baseCurrency = '';
-	var currencyUsDollar = $("#usDollar").val();
-	var currencyAudDollar = $("#audDollar").val();
-	var currencyReal = $("#real").val();
-	var currencyEuro = $("#euro").val();
+	var currencyUsDollar = $("#usDollar");
+	var currencyAudDollar = $("#audDollar");
+	var currencyReal = $("#real");
+	var currencyEuro = $("#euro");
 
-	
+	var oneWeek = $("#oneWeek");
+	var oneMonth = $("#oneMonth");
+	var oneYear = $("#oneYear");
 
-	$("#oneWeek").on('click', function(){
-		var numberOfDays = $("#oneWeek").val();
-		requestDates(numberOfDays);
+	currencyUsDollar.on('click', function(){
+		baseCurrency = currencyUsDollar.val();
+		requestDates(numberOfDays, baseCurrency);
 	});
 
-	$("#oneMonth").on('click', function(){
-		var numberOfDays = $("#oneMonth").val();
-		requestDates(numberOfDays);
+	currencyAudDollar.on('click', function(){
+		baseCurrency = currencyAudDollar.val();
+		requestDates(numberOfDays, baseCurrency);
 	});
 
-	$("#oneYear").on('click', function(){
-		var numberOfDays = $("#oneYear").val();
-		requestDates(numberOfDays);
+	currencyReal.on('click', function(){
+		baseCurrency = currencyReal.val();
+		requestDates(numberOfDays, baseCurrency);
 	});
 
-	function requestDates(numberOfDays){
-		$.ajax({url: "/quotations/historic_rates?number_of_days="+ numberOfDays, success: function(response){
-			var euro = [];
-			var us_dollar = [];
-			var australian_dollar = [];
+	requestDates(numberOfDays, baseCurrency);
 
-			for (var count in response) {
-				euro.push({x: new Date(response[count][0]), y: parseFloat(response[count][1]["EUR"].toFixed(4))});
-				us_dollar.push({x: new Date(response[count][0]), y: parseFloat(response[count][1]["USD"].toFixed(4))});
-				australian_dollar.push({x: new Date(response[count][0]), y: parseFloat(response[count][1]["AUD"].toFixed(4))});
-			}
+	currencyEuro.on('click', function(){
+		baseCurrency = currencyEuro.val();
+		requestDates(numberOfDays, baseCurrency);
+	});
+
+	oneWeek.on('click', function(){
+		numberOfDays = oneWeek.val();
+		requestDates(numberOfDays, baseCurrency);
+	});
+
+	oneMonth.on('click', function(){
+		numberOfDays = oneMonth.val();
+		requestDates(numberOfDays, baseCurrency);
+	});
+
+	oneYear.on('click', function(){
+		numberOfDays = oneYear.val();
+		requestDates(numberOfDays, baseCurrency);
+	});
+
+	function requestDates(numberOfDays, baseCurrency){
+		$.ajax({url: "/quotations/historic_rates?number_of_days="+ numberOfDays +"&base_currency=" + baseCurrency,
+						success: function(response){
+
+			var firstCurrencyValue = [];
+			var secondCurrencyValue = [];
+			var thirdCurrencyValue = [];
+
+			var legendFirstCurrencyValue;
+			var legendSecondCurrencyValue;
+			var legendThirdCurrencyValue;
+
+
+			response.map(function(element){
+				firstCurrencyValue.push({x: new Date(element.date), y: parseFloat(Object.values(element)[0].toFixed(3))});
+				secondCurrencyValue.push({x: new Date(element.date), y: parseFloat(Object.values(element)[1].toFixed(3))});
+				thirdCurrencyValue.push({x: new Date(element.date), y: parseFloat(Object.values(element)[2].toFixed(3))});
+
+				legendFirstCurrencyValue = Object.keys(element)[0];
+				legendSecondCurrencyValue = Object.keys(element)[1];
+				legendThirdCurrencyValue = Object.keys(element)[2];
+			})
+
 
 			var options = {
 				animationEnabled: true,
 				zoomEnabled: true,
 				theme: "light2",
 				title:{
-					text: "Compared Real with"
+					text: "Compared " + baseCurrency + " with"
 				},
 				axisY: {
 				},
@@ -64,38 +99,38 @@ $( document ).ready(function() {
 				data: [{
 					type: "line",
 					showInLegend: true,
-					name: "Euro",
+					name: legendFirstCurrencyValue,
 					markerType: "circle",
-					legendText: "Euro",
+					legendText: legendFirstCurrencyValue,
 					xValueFormatString: "DD MMM, YYYY",
 					color: "#00FA9A",
 					yValueFormatString: "",
 					dataPoints:
-							euro
+							firstCurrencyValue
 				},
 				{
 					type: "line",
 					showInLegend: true,
-					name: "US Dollar",
+					name: legendSecondCurrencyValue,
 					markerType: "circle",
-					legendText: "US Dollar",
+					legendText: legendSecondCurrencyValue,
 					xValueFormatString: "DD MMM, YYYY",
 					color: "#F08080",
 					yValueFormatString: "",
 					dataPoints:
-							us_dollar
+							secondCurrencyValue
 				},
 				{
 					type: "line",
 					showInLegend: true,
-					name: "Australian Dollar",
+					name: legendThirdCurrencyValue,
 					markerType: "circle",
-					legendText: "Australian Dollar",
+					legendText: legendThirdCurrencyValue,
 					xValueFormatString: "DD MMM, YYYY",
 					color: "#FFD700",
 					yValueFormatString: "",
 					dataPoints:
-							australian_dollar
+							thirdCurrencyValue
 				}]
 			};
 			$("#chartContainer").CanvasJSChart(options);

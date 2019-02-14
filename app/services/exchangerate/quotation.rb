@@ -1,10 +1,10 @@
 require './lib/exchangerate/request'
 class Exchangerate::Quotation
-  CURRENCIES = ['USD','AUD','EUR']
 
-  def self.get_history(date_interval = {})
-    currencies = CURRENCIES.join(',')
-    resource_path = "history?start_at=#{date_interval[:start]}&end_at=#{date_interval[:end]}&symbols=#{currencies}&base=BRL"
+  def self.get_history(params)
+    currencies_to_compare = params[:currencies].join(',')
+    base_currency = params[:base_currency]
+    resource_path = "history?start_at=#{params[:start]}&end_at=#{params[:end]}&symbols=#{currencies_to_compare}&base=#{base_currency}"
     Exchangerate::Request.where(resource_path)
   end
 end
