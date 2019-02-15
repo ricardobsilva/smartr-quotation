@@ -6,7 +6,7 @@ class Exchangerate::Connection
 
   def self.api
     Faraday.new(url: BASE) do |faraday|
-      faraday.response :logger
+      faraday.response :logger if !Rails.env.test?
       faraday.adapter Faraday.default_adapter
       faraday.headers['Content-Type'] = 'application/json'
     end
